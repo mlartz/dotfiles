@@ -436,6 +436,7 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Use the Solarized Dark theme () Terminal.app
 # https://github.com/tomislav/osx-lion-terminal.app-colors-solarized
 open "$HOME/.config/Solarized Dark.terminal"
+open "$HOME/.config/Solarized Light.terminal"
 sleep 1 # Wait a bit to make sure the theme is loaded
 defaults write com.apple.terminal "Default Window Settings" -string "Solarized Dark"
 defaults write com.apple.terminal "Startup Window Settings" -string "Solarized Dark"
