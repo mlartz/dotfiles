@@ -1,0 +1,23 @@
+[user]
+	name = Michael L. Artz
+	email = mlartz@gmail.com
+[core]
+	excludesfile = /Users/mlartz/.gitignore.global
+	editor = emacs
+	autocrlf = input
+[color]
+	ui = auto
+[alias]
+	co = checkout
+[apply]
+	whitespace = warn
+[push]
+#	default = simple
+[merge]
+	summary = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
