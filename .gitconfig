@@ -6,7 +6,7 @@
 	ui = auto
 [alias]
 	co = checkout
-	g = log --graph --oneline
+	g = log --graph --oneline --decorate --all
 [apply]
 	whitespace = warn
 [push]
