@@ -1,4 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
+MYZSH=$HOME/.zsh
 
 # CASE_SENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
@@ -12,6 +13,9 @@ plugins=(brew bundler gem git rails rake ruby rvm bundler)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.config/mlartz.zsh-theme
+
+source $MYZSH/aliases
+
 
 setopt nocorrectall
 
