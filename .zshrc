@@ -9,7 +9,7 @@ MYZSH=$HOME/.zsh
 COMPLETION_WAITING_DOTS="true"
 SOLARIZED_THEME="dark"
 
-plugins=(brew bundler gem git rails rake ruby rvm bundler)
+plugins=(brew bundler gem git node npm rails rake ruby rvm bundler)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.config/mlartz.zsh-theme
