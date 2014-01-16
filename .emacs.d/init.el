@@ -15,8 +15,10 @@
                       magit
                       paredit
                       ruby-end ruby-mode rvm
-                      starter-kit starter-kit-bindings starter-kit-eshell starter-kit-js starter-kit-lisp starter-kit-ruby
-                      yari)
+                      starter-kit starter-kit-bindings
+                      starter-kit-eshell starter-kit-js
+                      starter-kit-lisp starter-kit-ruby
+                      yaml-mode yari)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
