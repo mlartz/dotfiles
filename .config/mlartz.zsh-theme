@@ -8,8 +8,13 @@ function _prompt_char() {
   fi
 }
 
+function python_info {
+    PYBIN=`which python`
+    echo python-`$PYBIN --version 2>&1 | grep Python | cut -d ' ' -f 2`
+}
+
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo `basename $VIRTUAL_ENV`
+    [ $VIRTUAL_ENV ] && echo @`basename $VIRTUAL_ENV`
 }
 
 # This theme works with both the "dark" and "light" variants of the
@@ -31,4 +36,4 @@ PROMPT='%{%f%k%b%}
 %{%K{${bkg}}%B%F{green}%}%n%{%B%F{blue}%}@%{%B%F{cyan}%}%m%{%B%F{green}%}:%{%b%F{yellow}%K{${bkg}}%}%~%{%B%F{green}%}$(git_prompt_info)%E%{%f%k%b%}
 %{%K{${bkg}}%}$(_prompt_char)%{%K{${bkg}}%} %#%{%f%k%b%} '
 
-RPROMPT='[%{%B%F{cyan}%}$(rvm-prompt)|$(virtualenv_info)%{%f%k%b%}]'
+RPROMPT='[%{%B%F{cyan}%}$(rvm-prompt)|$(python_info)$(virtualenv_info)%{%f%k%b%}]'

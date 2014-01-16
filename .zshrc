@@ -9,6 +9,8 @@ MYZSH=$HOME/.zsh
 COMPLETION_WAITING_DOTS="true"
 SOLARIZED_THEME="dark"
 
+export PATH=$HOME/local/bin:/usr/local/sbin:/usr/local/bin:$PATH:$HOME/.rvm/bin
+
 plugins=(brew bundler gem git node npm rails rake ruby rvm virtualenv virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
@@ -16,9 +18,7 @@ source $HOME/.config/mlartz.zsh-theme
 
 source $MYZSH/aliases
 
-source /usr/local/bin/virtualenvwrapper.sh
-
 setopt nocorrectall
 
-export PATH=$HOME/local/bin:/usr/local/sbin:/usr/local/bin:$PATH:$HOME/.rvm/bin
 export CLICOLOR=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
