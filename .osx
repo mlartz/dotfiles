@@ -278,6 +278,9 @@ chflags nohidden ~/Library
 # Dock & hot corners                                                          #
 ###############################################################################
 
+# Enable dock transparency
+defaults write com.apple.dock hide-mirror -bool true
+
 # Put the dock on the right
 defaults write com.apple.dock orientation -string 'right'
 

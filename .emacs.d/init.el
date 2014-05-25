@@ -9,6 +9,7 @@
 
 ;; Add in your own as you wish:
 (defvar my-packages '(auto-complete
+                      cider clojure-mode clojure-test-mode
                       color-theme-solarized
                       ido ido-ubiquitous
                       js2-mode json-mode
