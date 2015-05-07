@@ -14,10 +14,12 @@
                       cider clojure-mode clojure-test-mode
                       color-theme-solarized
                       dash-at-point
+                      exec-path-from-shell
+                      flycheck
                       ido ido-ubiquitous
                       js2-mode json-mode
                       magit
-                      paredit
+                      paredit python-mode
                       ruby-end ruby-mode rvm
                       starter-kit starter-kit-bindings
                       starter-kit-eshell starter-kit-js
@@ -58,3 +60,12 @@
 
 ;; Code Navigation
 (setq tags-revert-without-query t)
+
+;; Python
+(require 'highlight-indentation)
+(add-hook 'python-mode-hook 'highlight-indentiation)
+
+;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
