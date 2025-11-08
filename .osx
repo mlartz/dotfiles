@@ -436,16 +436,15 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\\U21a9"
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-# Use the Solarized Dark theme () Terminal.app
-# https://github.com/tomislav/osx-lion-terminal.app-colors-solarized
-open "$HOME/.config/Solarized Dark.terminal"
-open "$HOME/.config/Solarized Light.terminal"
+# Use the Gruvbox Dark theme for Terminal.app
+# https://github.com/sidnvy/gruvbox-terminal
+open "$HOME/.config/gruvbox-dark.terminal"
 sleep 1 # Wait a bit to make sure the theme is loaded
-defaults write com.apple.terminal "Default Window Settings" -string "Solarized Dark"
-defaults write com.apple.terminal "Startup Window Settings" -string "Solarized Dark"
+defaults write com.apple.terminal "Default Window Settings" -string "gruvbox-dark"
+defaults write com.apple.terminal "Startup Window Settings" -string "gruvbox-dark"
 
 # Use Alt as Meta in Terminal.app
-/usr/libexec/PlistBuddy -c 'Set "Window Settings":"Solarized Dark":useOptionAsMetaKey true' ~/Library/Preferences/com.apple.Terminal.plist
+/usr/libexec/PlistBuddy -c 'Set "Window Settings":"gruvbox-dark":useOptionAsMetaKey true' ~/Library/Preferences/com.apple.Terminal.plist
 
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
