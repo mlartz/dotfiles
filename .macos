@@ -646,7 +646,21 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Don’t display the annoying prompt when quitting iTerm
+# Install Gruvbox Dark terminal theme
+TERM_PROFILE='Gruvbox Dark';
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Import the Gruvbox Dark terminal profile
+open "${CURRENT_DIR}/.config/gruvbox-dark.terminal"
+
+# Wait for the profile to be imported
+sleep 1
+
+# Set Gruvbox Dark as the default terminal theme
+defaults write com.apple.Terminal "Default Window Settings" -string "${TERM_PROFILE}"
+defaults write com.apple.Terminal "Startup Window Settings" -string "${TERM_PROFILE}"
+
+# Don't display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 ###############################################################################
