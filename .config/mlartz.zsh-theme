@@ -17,15 +17,8 @@ function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo @`basename $VIRTUAL_ENV`
 }
 
-# This theme works with both the "dark" and "light" variants of the
-# Solarized color schema.  Set the SOLARIZED_THEME variable to one of
-# these two values to choose.  If you don't specify, we'll assume you're
-# using the "dark" variant.
-
-case ${SOLARIZED_THEME:-dark} in
-    light) bkg=white;;
-    *)     bkg=black;;
-esac
+# Using dark background color for Gruvbox Dark theme
+bkg=black
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" [%{%B%F{blue}%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{%f%k%b%K{${bkg}}%B%F{green}%}]"

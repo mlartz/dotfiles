@@ -7,7 +7,6 @@ MYZSH=$HOME/.zsh
 # DISABLE_LS_COLORS="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
-SOLARIZED_THEME="dark"
 
 export PATH=$HOME/local/bin:/usr/local/sbin:/usr/local/bin:$PATH:$HOME/.rvm/bin
 
