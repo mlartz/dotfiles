@@ -328,6 +328,12 @@
   ;; Performance optimization: disable event logging
   (setq eglot-events-buffer-size 0)
 
+  ;; Configure rust-analyzer path if custom installation exists
+  (let ((rust-analyzer-path (expand-file-name "~/.toolbox/bin/rust-analyzer")))
+    (when (file-exists-p rust-analyzer-path)
+      (add-to-list 'eglot-server-programs
+                   `((rust-mode rust-ts-mode rustic-mode) . (,rust-analyzer-path)))))
+
   ;; Keybindings
   :bind (:map eglot-mode-map
               ("C-c l r" . eglot-rename)
