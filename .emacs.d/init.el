@@ -514,7 +514,7 @@
 ;;                          :height font-size
 ;;                          :weight 'normal))))
 
-(add-hook 'after-init-hook #'my/setup-fonts)
+;;(add-hook 'after-init-hook #'my/setup-fonts)
 
 ;; ============================================
 ;; 16. Security Settings
