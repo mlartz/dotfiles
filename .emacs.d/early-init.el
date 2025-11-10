@@ -30,8 +30,9 @@
 ;; Native Compilation Settings (Emacs 28+)
 ;; ============================================
 
-;; Suppress native-comp warnings
-(setq native-comp-async-report-warnings-errors 'silent)
+;; Suppress native-comp warnings (only if native-comp is available)
+(when (boundp 'native-comp-async-report-warnings-errors)
+  (setq native-comp-async-report-warnings-errors 'silent))
 
 ;; Set native-comp cache directory
 (when (fboundp 'startup-redirect-eln-cache)
