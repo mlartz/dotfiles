@@ -35,7 +35,9 @@
   (setq native-comp-async-report-warnings-errors 'silent))
 
 ;; Set native-comp cache directory
-(when (fboundp 'startup-redirect-eln-cache)
+;; Check both the function and variable exist (native-comp may not be available)
+(when (and (fboundp 'startup-redirect-eln-cache)
+           (boundp 'native-comp-eln-load-path))
   (startup-redirect-eln-cache
    (expand-file-name "var/eln-cache/" user-emacs-directory)))
 
