@@ -15,7 +15,7 @@ cd ~/dotfiles
 
 The bootstrap script will:
 - Install Homebrew (if not already installed)
-- Install all packages from the Brewfile (including rustup)
+- Install all packages from the Brewfile using `brew bundle`
 - Initialize Rust toolchain via rustup-init
 - Optionally apply macOS system defaults
 
@@ -122,7 +122,7 @@ The `Brewfile` installs:
 ### Setup Scripts
 
 - **`bootstrap.sh`** - Main setup script for new Macs
-- **`Brewfile`** - Homebrew Bundle file
+- **`Brewfile`** - Homebrew Bundle file for package management
 - **`.macos`** - macOS system defaults and preferences
 
 ## macOS System Defaults
@@ -185,7 +185,11 @@ npm update -g
 
 ## Customization
 
-### Adding More Packages
+### Managing Packages with Brewfile
+
+**brew bundle is now built into Homebrew core** (no tap needed as of Homebrew 4.5.0)
+
+#### Adding Packages
 
 Edit the `Brewfile` and add packages:
 
@@ -195,10 +199,56 @@ cask "app-name"              # GUI applications
 mas "App Name", id: 123456   # Mac App Store apps
 ```
 
-Then run:
+Then install new packages:
 
 ```bash
-brew bundle
+brew bundle install
+```
+
+#### Keeping Your Brewfile Up-to-Date
+
+Generate a Brewfile from currently installed packages:
+
+```bash
+brew bundle dump --force
+```
+
+This creates/overwrites the Brewfile with all currently installed packages.
+
+#### Cleanup Unused Packages
+
+Remove packages not listed in the Brewfile:
+
+```bash
+brew bundle cleanup
+```
+
+Add `--force` to actually remove them (without it, it just shows what would be removed):
+
+```bash
+brew bundle cleanup --force
+```
+
+#### Check Brewfile Status
+
+See if everything in your Brewfile is installed:
+
+```bash
+brew bundle check
+```
+
+List all packages from the Brewfile:
+
+```bash
+brew bundle list
+```
+
+#### Track Only "Leaves"
+
+To keep your Brewfile minimal, consider tracking only "leaves" (packages you explicitly want, excluding dependencies):
+
+```bash
+brew leaves > leaves.txt
 ```
 
 ### Finding Mac App Store IDs

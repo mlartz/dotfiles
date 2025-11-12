@@ -1,8 +1,8 @@
 # Brewfile - Homebrew Bundle file for Mac setup
-# Install all packages with: brew bundle
+# Install all packages with: brew bundle install
+# Note: brew bundle is now built into Homebrew core (no tap needed)
 
 # Taps
-tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
