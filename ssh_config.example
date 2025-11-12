@@ -1,0 +1,99 @@
+# SSH Configuration for Remote Development
+# =========================================
+# Optimized for iTerm2 + tmux Control Mode workflow
+#
+# Installation:
+#   1. Copy this file: cp ssh_config.example ~/.ssh/config
+#   2. Edit the Host entries with your actual server details
+#   3. Create control masters directory: mkdir -p ~/.ssh/controlmasters && chmod 700 ~/.ssh/controlmasters
+#   4. Ensure ~/.ssh directory permissions: chmod 700 ~/.ssh
+
+# Global defaults for all hosts
+# ------------------------------
+Host *
+    # Connection multiplexing - reuses existing connections for speed
+    # First connection creates a master socket; subsequent connections reuse it
+    ControlMaster auto
+    ControlPath ~/.ssh/controlmasters/%C
+
+    # Keep master connection alive for 30 minutes after last client disconnects
+    # This makes reconnections nearly instant after brief disconnections
+    ControlPersist 30m
+
+    # Keepalive settings to prevent connection timeouts
+    # Sends null packet every 60 seconds; disconnects after 3 failed attempts (3 minutes)
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    TCPKeepAlive yes
+
+    # Enable compression for better performance on slow connections
+    Compression yes
+
+
+# Development Server Configuration
+# ---------------------------------
+# Replace with your actual server details
+Host devserver
+    HostName dev.example.com
+    User youruser
+    Port 22
+
+    # Optional: Use specific SSH key
+    # IdentityFile ~/.ssh/id_rsa_devserver
+
+    # Optional: Jump host/bastion configuration
+    # ProxyJump bastion.example.com
+
+    # Optional: Forward agent for git operations
+    # ForwardAgent yes
+
+
+# Example: Bastion/Jump Host Configuration
+# -----------------------------------------
+# If you need to SSH through a bastion host
+# Host bastion
+#     HostName bastion.example.com
+#     User youruser
+#     Port 22
+
+
+# Example: Multiple Development Environments
+# -------------------------------------------
+# Host dev-staging
+#     HostName staging.example.com
+#     User youruser
+#
+# Host dev-production
+#     HostName prod.example.com
+#     User youruser
+#     # Production might need different settings
+#     ControlPersist 10m
+
+
+# Connection Aliases for Different Workflows
+# -------------------------------------------
+# You can create these aliases in your ~/.zshrc or ~/.bashrc
+#
+# For iTerm2 Control Mode (best for desktop work):
+#   alias work-desk='ssh devserver -t "tmux -CC attach -t work || tmux -CC new -s work"'
+#
+# For standard tmux (mobile or other terminals):
+#   alias work-quick='ssh devserver -t "tmux attach -t work || tmux new -s work"'
+#
+# For Mosh with tmux (when using unreliable networks):
+#   alias work-mobile='mosh devserver -- tmux attach -t work || tmux new -s work'
+
+
+# Troubleshooting
+# ---------------
+# If you get "ControlPath too long" errors, use this shorter path:
+#   ControlPath ~/.ssh/cm-%C
+#
+# To check if multiplexing is working:
+#   ssh -O check devserver
+#
+# To manually close the master connection:
+#   ssh -O exit devserver
+#
+# To see all active connections:
+#   ls -l ~/.ssh/controlmasters/

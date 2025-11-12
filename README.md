@@ -112,7 +112,7 @@ The `Brewfile` installs:
 ### Configuration Files
 
 - **`.zshrc`** - Zsh shell configuration
-- **`.tmux.conf`** - Tmux configuration with best practices
+- **`.tmux.conf`** - Tmux configuration optimized for iTerm2 Control Mode
 - **`.gitconfig`** - Git configuration
 - **`.gitconfig.private`** - Private git settings (not in repo)
 - **`.gitignore.global`** - Global gitignore patterns
@@ -124,6 +124,12 @@ The `Brewfile` installs:
 - **`bootstrap.sh`** - Main setup script for new Macs
 - **`Brewfile`** - Homebrew Bundle file for package management
 - **`.macos`** - macOS system defaults and preferences
+
+### Remote Development Workflow
+
+- **`REMOTE_WORKFLOW_SETUP.md`** - Complete guide for iTerm2 + tmux Control Mode
+- **`ssh_config.example`** - SSH configuration template with ControlMaster
+- **`tmux-work-session.sh`** - Automated workflow setup script
 
 ## macOS System Defaults
 
@@ -138,6 +144,41 @@ The `.macos` script configures hundreds of macOS system preferences including:
 
 **Warning:** Review the `.macos` file before running it, as it makes extensive system changes. Some settings may require restart.
 
+## Remote Development Workflow
+
+This repository includes configuration for an optimized remote SSH development workflow using **iTerm2 + tmux Control Mode**.
+
+**Benefits:**
+- ✅ Native macOS scrolling with trackpad gestures
+- ✅ Native window switching (Cmd+Tab, Mission Control)
+- ✅ Full mouse support and native copy/paste
+- ✅ Session persistence across disconnections
+
+**Quick Setup:**
+```bash
+# 1. Configure SSH (see ssh_config.example)
+cp ssh_config.example ~/.ssh/config
+# Edit with your server details
+
+# 2. Create control masters directory
+mkdir -p ~/.ssh/controlmasters && chmod 700 ~/.ssh/controlmasters
+
+# 3. Add shell alias to ~/.zshrc
+echo "alias work='ssh devserver -t \"tmux -CC attach -t work || tmux -CC new -s work\"'" >> ~/.zshrc
+source ~/.zshrc
+
+# 4. Connect with Control Mode
+work
+```
+
+**Full Documentation:** See [REMOTE_WORKFLOW_SETUP.md](REMOTE_WORKFLOW_SETUP.md) for complete setup guide, usage instructions, and troubleshooting.
+
+**Files:**
+- `REMOTE_WORKFLOW_SETUP.md` - Complete setup and usage guide
+- `ssh_config.example` - SSH configuration template with ControlMaster
+- `.tmux.conf` - Optimized tmux configuration for Control Mode
+- `tmux-work-session.sh` - Automated workflow script (1 emacs + 3 shells)
+
 ## Manual Steps
 
 After running the bootstrap, you may want to:
@@ -146,6 +187,7 @@ After running the bootstrap, you may want to:
    - Import the Gruvbox Dark color scheme
    - Set font to a powerline-compatible font
    - Configure keyboard shortcuts
+   - For remote work, see REMOTE_WORKFLOW_SETUP.md
 
 2. **Evernote Setup**
    - Launch Evernote from Applications
