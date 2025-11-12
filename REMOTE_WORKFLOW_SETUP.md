@@ -395,14 +395,17 @@ Cmd+Tab           # Switch windows
 Cmd+C / Cmd+V     # Copy / Paste
 ```
 
-### Copy Mode (Vi-style)
+### Copy Mode (Emacs-style)
 ```bash
 Ctrl+o            # Enter copy mode
-v                 # Begin selection
-y                 # Copy selection (to macOS clipboard)
+C-Space           # Begin selection (or C-@)
+M-w               # Copy selection (to macOS clipboard)
+C-w               # Cut selection (to macOS clipboard)
 q                 # Exit copy mode
-/                 # Search forward
-?                 # Search backward
+C-s               # Search forward (incremental search)
+C-r               # Search backward (reverse incremental search)
+C-v               # Page down
+M-v               # Page up
 ```
 
 ## Next Steps
