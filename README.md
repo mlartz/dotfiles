@@ -15,6 +15,8 @@ cd ~/dotfiles
 
 The bootstrap script will:
 - Install Homebrew (if not already installed)
+- Install all packages from the Brewfile using `brew bundle`
+- Initialize Rust toolchain via rustup-init
 - Optionally apply macOS system defaults
 
 ```bash
@@ -59,6 +61,51 @@ EOF
 source ~/.zshrc
 ```
 
+## What Gets Installed
+
+### Homebrew Packages
+
+The `Brewfile` installs:
+
+#### Command-line Tools
+- **mas** - Mac App Store CLI
+- **node** - Node.js runtime
+- **git** - Version control
+- **tmux** - Terminal multiplexer
+- **rustup** - Rust toolchain installer
+- **ripgrep** - Fast grep alternative
+- **fzf** - Fuzzy finder
+- **jq** - JSON processor
+- **wget**, **curl** - File downloaders
+- **tree** - Directory visualization
+- **gcc**, **cmake** - Build tools
+- **python** - Python 3
+
+#### Applications (Casks)
+- **Emacs** - Text editor
+- **iTerm2** - Terminal emulator
+- **Docker** - Containerization
+- **Rectangle** - Window management
+- **Visual Studio Code** - Code editor
+
+#### Fonts
+- Source Code Pro
+- Fira Code
+- JetBrains Mono
+
+#### Mac App Store Apps
+- **Evernote** - Note-taking app
+
+### Rust Installation
+
+**rustup** (the Rust toolchain installer) is installed via Homebrew and automatically initialized by the bootstrap script.
+
+**Why this approach?**
+- The `rustup` binary is managed by Homebrew (declared in Brewfile)
+- The bootstrap script runs `rustup-init` to set up the Rust toolchain
+- This combines centralized package management with proper Rust toolchain handling
+- Updates to the Rust toolchain are managed via `rustup update` (as recommended by the Rust project)
+- The `--no-modify-path` flag is used since shell configuration is handled by dotfiles
 
 ## Files Overview
 
@@ -75,6 +122,7 @@ source ~/.zshrc
 ### Setup Scripts
 
 - **`bootstrap.sh`** - Main setup script for new Macs
+- **`Brewfile`** - Homebrew Bundle file for package management
 - **`.macos`** - macOS system defaults and preferences
 
 ## macOS System Defaults
@@ -136,6 +184,72 @@ npm update -g
 ```
 
 ## Customization
+
+### Managing Packages with Brewfile
+
+**brew bundle is now built into Homebrew core** (no tap needed as of Homebrew 4.5.0)
+
+#### Adding Packages
+
+Edit the `Brewfile` and add packages:
+
+```ruby
+brew "package-name"          # Command-line tools
+cask "app-name"              # GUI applications
+mas "App Name", id: 123456   # Mac App Store apps
+```
+
+Then install new packages:
+
+```bash
+brew bundle install
+```
+
+#### Keeping Your Brewfile Up-to-Date
+
+Generate a Brewfile from currently installed packages:
+
+```bash
+brew bundle dump --force
+```
+
+This creates/overwrites the Brewfile with all currently installed packages.
+
+#### Cleanup Unused Packages
+
+Remove packages not listed in the Brewfile:
+
+```bash
+brew bundle cleanup
+```
+
+Add `--force` to actually remove them (without it, it just shows what would be removed):
+
+```bash
+brew bundle cleanup --force
+```
+
+#### Check Brewfile Status
+
+See if everything in your Brewfile is installed:
+
+```bash
+brew bundle check
+```
+
+List all packages from the Brewfile:
+
+```bash
+brew bundle list
+```
+
+#### Track Only "Leaves"
+
+To keep your Brewfile minimal, consider tracking only "leaves" (packages you explicitly want, excluding dependencies):
+
+```bash
+brew leaves > leaves.txt
+```
 
 ### Finding Mac App Store IDs
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # bootstrap.sh - Set up a new Mac from scratch
-# This script installs Homebrew
+# This script installs Homebrew and packages from Brewfile
 
 set -e
 
@@ -49,6 +49,17 @@ fi
 # Update Homebrew
 info "Updating Homebrew..."
 brew update
+
+# Install packages from Brewfile
+# Note: brew bundle is now built into Homebrew core (no tap needed)
+if [ -f "$HOME/dotfiles/Brewfile" ] || [ -f "$(dirname "$0")/Brewfile" ]; then
+    info "Installing packages from Brewfile..."
+    cd "$(dirname "$0")"
+    brew bundle install --verbose
+    info "All packages installed successfully!"
+else
+    warn "Brewfile not found. Skipping package installation."
+fi
 
 # Initialize rustup (Rust toolchain)
 if ! command -v rustc &> /dev/null; then
