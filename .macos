@@ -662,6 +662,160 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "${TERM_PROF
 # Don't display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+# iTerm2 Configuration Best Practices
+# ====================================
+
+# Install Gruvbox Dark color scheme
+# Copy the color scheme file to iTerm2's colors directory
+mkdir -p "${HOME}/Library/Application Support/iTerm2/Colors"
+cp "${HOME}/.config/Gruvbox-Dark.itermcolors" "${HOME}/Library/Application Support/iTerm2/Colors/" 2>/dev/null || true
+
+# Install the Dynamic Profile with Gruvbox Dark theme
+# This includes all best practices for SSH and tmux work
+mkdir -p "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
+cp "${HOME}/.config/iterm2-gruvbox-profile.json" "${HOME}/Library/Application Support/iTerm2/DynamicProfiles/" 2>/dev/null || true
+
+# General iTerm2 Preferences
+# ---------------------------
+
+# Only use UTF-8 in iTerm2
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.config"
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
+# Enable infinite scrollback (be careful with this on resource-constrained systems)
+# Alternatively, set a high limit like 100000
+defaults write com.googlecode.iterm2 "Unlimited Scrollback" -bool false
+defaults write com.googlecode.iterm2 "Scrollback Lines" -int 10000
+
+# Enable tmux integration mode
+# This allows native iTerm2 tabs/windows to control tmux sessions
+defaults write com.googlecode.iterm2 "tmux Dashboard Limit" -int 10
+
+# Disable the tmux integration warning
+defaults write com.googlecode.iterm2 "SuppressTmuxIntegrationWarning" -bool true
+
+# Performance Optimizations for SSH
+# ----------------------------------
+
+# Enable GPU rendering for better performance
+defaults write com.googlecode.iterm2 "GPU Rendering" -bool true
+
+# Use Metal renderer (recommended for modern Macs)
+defaults write com.googlecode.iterm2 "Metal" -bool true
+
+# Reduce visual effects for better performance over SSH
+defaults write com.googlecode.iterm2 "UseLowFiCombiningMarks" -bool true
+
+# Window and Tab Behavior
+# ------------------------
+
+# Show tab bar even with only one tab (helpful for tmux workflows)
+defaults write com.googlecode.iterm2 HideTab -bool false
+
+# Show window number in title bar (useful with multiple SSH sessions)
+defaults write com.googlecode.iterm2 WindowNumber -bool true
+
+# Native full screen windows (recommended for multi-monitor setups)
+defaults write com.googlecode.iterm2 UseLionStyleFullscreen -bool false
+
+# Don't restore windows when opening iTerm2
+# (Prevents issues when SSH sessions were terminated)
+defaults write com.googlecode.iterm2 OpenArrangementAtStartup -bool false
+defaults write com.googlecode.iterm2 OpenNoWindowsAtStartup -bool false
+
+# Keyboard and Input
+# -------------------
+
+# Option keys send Meta (essential for Emacs and some CLI tools)
+# 0 = Normal, 1 = Meta, 2 = +Esc
+defaults write com.googlecode.iterm2 "Option Key Sends" -int 0
+defaults write com.googlecode.iterm2 "Right Option Key Sends" -int 0
+
+# Application in terminal may access clipboard
+defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
+
+# SSH and Remote Session Optimizations
+# -------------------------------------
+
+# Disable saving lines to scrollback when in alternate screen mode
+# (Prevents issues with less, vim, etc.)
+defaults write com.googlecode.iterm2 "Scrollback With Status Bar" -bool false
+
+# Enable mouse reporting (required for tmux mouse support)
+defaults write com.googlecode.iterm2 "Mouse Reporting" -bool true
+
+# Terminal Compatibility
+# -----------------------
+
+# Report terminal as xterm-256color (best compatibility with remote servers)
+defaults write com.googlecode.iterm2 "Terminal Type" -string "xterm-256color"
+
+# Character encoding UTF-8
+defaults write com.googlecode.iterm2 "Character Encoding" -int 4
+
+# Appearance
+# ----------
+
+# Use minimal theme for cleaner interface
+defaults write com.googlecode.iterm2 TabStyleWithAutomaticOption -int 5
+
+# Show border around window
+defaults write com.googlecode.iterm2 UseBorder -bool false
+
+# Dimming
+defaults write com.googlecode.iterm2 "Dim Only Text" -bool false
+defaults write com.googlecode.iterm2 "Dimming Amount" -float 0.1
+
+# Session and Connection Management
+# ----------------------------------
+
+# Auto-close tabs/windows when sessions end
+defaults write com.googlecode.iterm2 "Close Sessions On End" -bool true
+
+# Prompt before closing if there are running jobs
+# 0 = Never, 1 = If jobs, 2 = Always
+defaults write com.googlecode.iterm2 "Prompt Before Closing 2" -int 1
+
+# Jobs to ignore when checking for prompt before closing
+# (won't prompt when these are running)
+defaults write com.googlecode.iterm2 "Jobs to Ignore" -array "rlogin" "ssh" "slogin" "telnet" "tmux"
+
+# Advanced Settings
+# -----------------
+
+# Disable the bell completely (annoying in SSH sessions)
+defaults write com.googlecode.iterm2 "Silence Bell" -bool false
+defaults write com.googlecode.iterm2 "Visual Bell" -bool true
+
+# Semantic history - open files in your editor when Cmd-clicking
+# This works even with files on remote servers when using tmux integration
+defaults write com.googlecode.iterm2 "Semantic History" -dict-add "action" -string "best editor"
+
+# Status bar configuration
+defaults write com.googlecode.iterm2 "Show Status Bar" -bool false
+
+# Smart cursor color (automatically choose cursor color for visibility)
+defaults write com.googlecode.iterm2 "Smart Cursor Color" -bool true
+
+# Font ligatures (if using a programming font like Fira Code)
+defaults write com.googlecode.iterm2 "ASCII Ligatures" -bool true
+defaults write com.googlecode.iterm2 "Non-ASCII Ligatures" -bool true
+
+# Copy to clipboard on selection (optional - can be annoying)
+defaults write com.googlecode.iterm2 "CopySelection" -bool false
+
+# Paste on middle click (traditional Unix behavior)
+defaults write com.googlecode.iterm2 "ThreeFingerEmulates" -bool false
+
+# Advanced paste settings (safer for pasting into SSH sessions)
+defaults write com.googlecode.iterm2 "Paste Special Chunk Size" -int 1024
+defaults write com.googlecode.iterm2 "Paste Special Chunk Delay" -float 0.01
+
+# Note: For the theme to take effect, you need to:
+# 1. Open iTerm2 Preferences → Profiles
+# 2. Select "Gruvbox Dark" from the profile list
+# 3. Set it as the default profile
+
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################

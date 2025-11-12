@@ -36,10 +36,14 @@ ln -sf ~/dotfiles/.gitignore.global ~/.gitignore.global
 # Emacs configuration
 ln -sf ~/dotfiles/.emacs.d ~/.emacs.d
 
-# Terminal theme
+# Terminal and iTerm2 themes
 mkdir -p ~/.config
 ln -sf ~/dotfiles/.config/gruvbox-dark.terminal ~/.config/
+ln -sf ~/dotfiles/.config/Gruvbox-Dark.itermcolors ~/.config/
+ln -sf ~/dotfiles/.config/iterm2-gruvbox-profile.json ~/.config/
 ```
+
+**Note:** The `.macos` script automatically copies the iTerm2 files to the appropriate locations, so manual symlinking of iTerm2 files is optional.
 
 ### 4. Configure private settings
 
@@ -112,12 +116,16 @@ The `Brewfile` installs:
 ### Configuration Files
 
 - **`.zshrc`** - Zsh shell configuration
-- **`.tmux.conf`** - Tmux configuration optimized for iTerm2 Control Mode
+- **`.tmux.conf`** - Tmux configuration optimized for iTerm2 Control Mode and remote work
 - **`.gitconfig`** - Git configuration
 - **`.gitconfig.private`** - Private git settings (not in repo)
 - **`.gitignore.global`** - Global gitignore patterns
 - **`.emacs.d/`** - Emacs configuration
 - **`.config/`** - Additional config files
+  - **`gruvbox-dark.terminal`** - Gruvbox Dark theme for Terminal.app
+  - **`Gruvbox-Dark.itermcolors`** - Gruvbox Dark color scheme for iTerm2
+  - **`iterm2-gruvbox-profile.json`** - iTerm2 Dynamic Profile with SSH/tmux optimizations
+  - **`mlartz.zsh-theme`** - Custom Zsh theme
 
 ### Setup Scripts
 
@@ -184,10 +192,47 @@ work
 After running the bootstrap, you may want to:
 
 1. **iTerm2 Configuration**
-   - Import the Gruvbox Dark color scheme
-   - Set font to a powerline-compatible font
-   - Configure keyboard shortcuts
-   - For remote work, see REMOTE_WORKFLOW_SETUP.md
+
+   The `.macos` script automatically configures iTerm2 with Gruvbox Dark theme and best practices for SSH/tmux workflows.
+
+   **What's Configured:**
+   - Gruvbox Dark color scheme (optimized for readability)
+   - 10,000 line scrollback buffer
+   - UTF-8 encoding
+   - xterm-256color terminal type (best compatibility)
+   - GPU/Metal rendering for performance
+   - Mouse reporting (for tmux mouse support)
+   - Ligature support for Fira Code font
+   - Smart cursor color
+   - Visual bell (no audio bell)
+   - Proper window/tab behavior for multi-session work
+
+   **To Activate:**
+   After running `.macos`, open iTerm2 and:
+   - Go to Preferences → Profiles
+   - Select "Gruvbox Dark" from the profile list
+   - Click "Other Actions..." → "Set as Default"
+   - Restart iTerm2 for all settings to take effect
+
+   **Font Configuration:**
+   - The profile uses Fira Code 13pt by default
+   - You can change this in Preferences → Profiles → Text
+   - Recommended fonts: Fira Code, JetBrains Mono, Source Code Pro (all installed via Brewfile)
+
+   **SSH and Tmux Best Practices Included:**
+   - Tmux integration mode enabled (use `tmux -CC` for native tmux windows)
+   - Proper escape sequence handling for remote vim/emacs
+   - Jobs whitelist configured (ssh, tmux won't trigger close warnings)
+   - Clipboard access enabled for remote copy/paste
+   - Safe paste settings (chunked, delayed) to prevent issues with remote shells
+
+   **Pro Tips:**
+   - Use `tmux -CC attach` to attach to remote tmux sessions with native iTerm2 tabs/windows
+   - Cmd+Click on file paths opens them in your editor (even on remote servers with tmux integration)
+   - The same .tmux.conf works seamlessly on both Mac and remote Linux servers
+   - Mouse support in tmux is enabled - you can click to switch panes, scroll, resize, etc.
+
+   **For Remote Development:** See [REMOTE_WORKFLOW_SETUP.md](REMOTE_WORKFLOW_SETUP.md) for complete workflow setup
 
 2. **Evernote Setup**
    - Launch Evernote from Applications
