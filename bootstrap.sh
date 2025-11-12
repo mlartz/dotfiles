@@ -66,14 +66,20 @@ else
     warn "Brewfile not found. Skipping package installation."
 fi
 
-# Install rustup (Rust toolchain)
-if ! command -v rustup &> /dev/null; then
-    info "Installing rustup..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    source "$HOME/.cargo/env"
-    info "Rustup installed successfully!"
+# Initialize rustup (Rust toolchain)
+# Note: rustup binary is installed via Homebrew (see Brewfile)
+if ! command -v rustc &> /dev/null; then
+    if command -v rustup-init &> /dev/null; then
+        info "Initializing rustup..."
+        rustup-init -y --no-modify-path
+        # Source cargo environment for current session
+        [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+        info "Rustup initialized successfully!"
+    else
+        warn "rustup-init not found. Install rustup via Homebrew first."
+    fi
 else
-    info "Rustup is already installed"
+    info "Rust toolchain is already installed"
 fi
 
 # Prompt to run .macos configuration

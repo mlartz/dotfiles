@@ -19,6 +19,7 @@ brew "tmux"             # Terminal multiplexer
 brew "gcc"              # GNU Compiler Collection
 brew "cmake"            # Cross-platform make
 brew "python@3.12"      # Python 3
+brew "rustup"           # Rust toolchain installer
 brew "jq"               # JSON processor
 brew "ripgrep"          # Fast grep alternative
 brew "fzf"              # Fuzzy finder
@@ -45,5 +46,6 @@ mas "Evernote", id: 406056744
 # mas "1Password", id: 1333542190
 # mas "Slack", id: 803453959
 
-# VS Code extensions and other post-install steps should be handled separately
-# Rustup is installed via bootstrap.sh as it's not in Homebrew
+# Post-install notes:
+# - rustup requires initialization via `rustup-init` (handled by bootstrap.sh)
+# - VS Code extensions should be installed separately

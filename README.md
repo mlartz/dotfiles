@@ -15,8 +15,8 @@ cd ~/dotfiles
 
 The bootstrap script will:
 - Install Homebrew (if not already installed)
-- Install all packages from the Brewfile
-- Install Rustup (Rust toolchain)
+- Install all packages from the Brewfile (including rustup)
+- Initialize Rust toolchain via rustup-init
 - Optionally apply macOS system defaults
 
 ```bash
@@ -72,6 +72,7 @@ The `Brewfile` installs:
 - **node** - Node.js runtime
 - **git** - Version control
 - **tmux** - Terminal multiplexer
+- **rustup** - Rust toolchain installer
 - **ripgrep** - Fast grep alternative
 - **fzf** - Fuzzy finder
 - **jq** - JSON processor
@@ -95,9 +96,16 @@ The `Brewfile` installs:
 #### Mac App Store Apps
 - **Evernote** - Note-taking app
 
-### Rustup
+### Rust Installation
 
-The Rust toolchain is installed via the official rustup installer.
+**rustup** (the Rust toolchain installer) is installed via Homebrew and automatically initialized by the bootstrap script.
+
+**Why this approach?**
+- The `rustup` binary is managed by Homebrew (declared in Brewfile)
+- The bootstrap script runs `rustup-init` to set up the Rust toolchain
+- This combines centralized package management with proper Rust toolchain handling
+- Updates to the Rust toolchain are managed via `rustup update` (as recommended by the Rust project)
+- The `--no-modify-path` flag is used since shell configuration is handled by dotfiles
 
 ## Files Overview
 
