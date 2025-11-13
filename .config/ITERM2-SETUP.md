@@ -2,43 +2,27 @@
 
 Complete guide for iTerm2 setup with Gruvbox Dark theme, optimized for SSH and tmux workflows.
 
-## Quick Setup
+## Installing the Gruvbox Dark Color Scheme
 
-### Automatic Setup (Recommended)
+### Manual Installation
 
-The `.macos` script automatically configures everything:
+To use the Gruvbox Dark color scheme with your iTerm2 profile:
 
-```bash
-cd ~/dotfiles
-./.macos
-```
-
-This will:
-- Install Gruvbox Dark color scheme
-- Install the optimized Dynamic Profile
-- Configure all iTerm2 preferences for best SSH/tmux experience
-
-### Manual Setup
-
-If you prefer manual installation or need to set up on a different machine:
-
-1. **Install Color Scheme:**
+1. **Import the color scheme:**
    ```bash
    open ~/.config/Gruvbox-Dark.itermcolors
    ```
-   This will import the color scheme into iTerm2.
+   This will automatically import the color scheme into iTerm2.
 
-2. **Install Dynamic Profile:**
-   ```bash
-   mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
-   cp ~/.config/iterm2-gruvbox-profile.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/
-   ```
-
-3. **Set as Default:**
+2. **Apply to your profile:**
    - Open iTerm2 Preferences (⌘+,)
-   - Go to Profiles
-   - Select "Gruvbox Dark"
-   - Click "Other Actions..." → "Set as Default"
+   - Go to **Profiles** → **Colors**
+   - Click the **Color Presets...** dropdown in the bottom right
+   - Select **Gruvbox Dark** from the list
+
+3. **Set as default (optional):**
+   - In the Profiles pane, select your profile
+   - Click **Other Actions...** → **Set as Default**
 
 ## Gruvbox Dark Color Scheme
 
@@ -496,7 +480,6 @@ Example: Alt+Left/Right for word navigation
 - `.tmux.conf` - Tmux configuration (works on all platforms)
 - `.macos` - Automated iTerm2 setup script
 - `Gruvbox-Dark.itermcolors` - Color scheme file
-- `iterm2-gruvbox-profile.json` - Complete profile with all settings
 
 ### Tips & Tricks
 - Use `Cmd+Shift+H` to show paste history

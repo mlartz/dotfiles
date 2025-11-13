@@ -670,11 +670,6 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 mkdir -p "${HOME}/Library/Application Support/iTerm2/Colors"
 cp "${HOME}/.config/Gruvbox-Dark.itermcolors" "${HOME}/Library/Application Support/iTerm2/Colors/" 2>/dev/null || true
 
-# Install the Dynamic Profile with Gruvbox Dark theme
-# This includes all best practices for SSH and tmux work
-mkdir -p "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
-cp "${HOME}/.config/iterm2-gruvbox-profile.json" "${HOME}/Library/Application Support/iTerm2/DynamicProfiles/" 2>/dev/null || true
-
 # General iTerm2 Preferences
 # ---------------------------
 
@@ -811,10 +806,10 @@ defaults write com.googlecode.iterm2 "ThreeFingerEmulates" -bool false
 defaults write com.googlecode.iterm2 "Paste Special Chunk Size" -int 1024
 defaults write com.googlecode.iterm2 "Paste Special Chunk Delay" -float 0.01
 
-# Note: For the theme to take effect, you need to:
-# 1. Open iTerm2 Preferences → Profiles
-# 2. Select "Gruvbox Dark" from the profile list
-# 3. Set it as the default profile
+# Note: To apply the Gruvbox Dark color scheme:
+# 1. Open iTerm2 Preferences (⌘+,) → Profiles → Colors
+# 2. Click "Color Presets..." dropdown
+# 3. Select "Gruvbox Dark" from the list
 
 ###############################################################################
 # Time Machine                                                                #
