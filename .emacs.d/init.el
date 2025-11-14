@@ -88,7 +88,26 @@
 (column-number-mode 1)
 
 ;; ============================================
-;; 4. UI Configuration
+;; 4. Mouse and Terminal Support
+;; ============================================
+
+;; Enable mouse support in terminal mode
+;; Essential for emacs in tmux (including tmux -CC) over SSH
+(xterm-mouse-mode 1)
+
+;; Pixel-precise scrolling (Emacs 29+)
+;; Note: This is primarily for GUI mode, may have limited effect in terminal
+(when (>= emacs-major-version 29)
+  (pixel-scroll-precision-mode 1))
+
+;; Smooth mouse wheel scrolling
+;; Works in both terminal and GUI modes
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))  ; Scroll 1 line at a time
+      mouse-wheel-progressive-speed nil              ; Don't accelerate scrolling
+      mouse-wheel-follow-mouse 't)                   ; Scroll window under mouse
+
+;; ============================================
+;; 5. UI Configuration
 ;; ============================================
 
 ;; Disable unnecessary UI elements (redundant with early-init, but ensures terminal mode)
@@ -122,7 +141,7 @@
   (add-hook mode (lambda () (setq show-trailing-whitespace nil))))
 
 ;; ============================================
-;; 5. Theme Configuration
+;; 6. Theme Configuration
 ;; ============================================
 
 (use-package gruvbox-theme
@@ -144,7 +163,7 @@
 ;; (load-theme 'modus-operandi t) ; Light
 
 ;; ============================================
-;; 6. File Handling
+;; 7. File Handling
 ;; ============================================
 
 ;; Auto-revert files when changed externally
@@ -173,7 +192,7 @@
       (make-directory dir t))))
 
 ;; ============================================
-;; 7. Tree-sitter Configuration (Emacs 29+)
+;; 8. Tree-sitter Configuration (Emacs 29+)
 ;; ============================================
 
 ;; Tree-sitter provides fast, accurate syntax parsing
@@ -210,7 +229,7 @@
 ;; To install grammars: M-x treesit-install-language-grammar
 
 ;; ============================================
-;; 8. Completion Framework (Vertico Ecosystem)
+;; 9. Completion Framework (Vertico Ecosystem)
 ;; ============================================
 
 ;; Vertico - vertical completion UI (replaces Ivy/Helm)
@@ -310,7 +329,7 @@
   (add-to-list 'completion-at-point-functions #'cape-file))
 
 ;; ============================================
-;; 9. LSP Configuration (Eglot - Built-in)
+;; 10. LSP Configuration (Eglot - Built-in)
 ;; ============================================
 
 (use-package eglot
@@ -342,7 +361,7 @@
               ("C-c l d" . eldoc)))
 
 ;; ============================================
-;; 10. Language-Specific Configuration
+;; 11. Language-Specific Configuration
 ;; ============================================
 
 ;; -------------------- RUST --------------------
@@ -382,7 +401,7 @@
   (envrc-global-mode))  ; Automatically load .envrc files
 
 ;; ============================================
-;; 11. Project Management
+;; 12. Project Management
 ;; ============================================
 
 ;; Project.el is built-in (Emacs 28+)
@@ -399,7 +418,7 @@
           (magit-project-status "Magit" ?g))))
 
 ;; ============================================
-;; 12. Version Control (Git)
+;; 13. Version Control (Git)
 ;; ============================================
 
 ;; Magit - the best Git interface
@@ -424,7 +443,7 @@
     (diff-hl-margin-mode)))
 
 ;; ============================================
-;; 13. Whitespace Handling
+;; 14. Whitespace Handling
 ;; ============================================
 
 ;; ws-butler - intelligently trim whitespace (only on edited lines)
@@ -432,7 +451,7 @@
   :hook (prog-mode . ws-butler-mode))
 
 ;; ============================================
-;; 14. Additional Utilities
+;; 15. Additional Utilities
 ;; ============================================
 
 ;; which-key - show available keybindings (built-in Emacs 30+)
@@ -485,7 +504,7 @@
   :after yasnippet)
 
 ;; ============================================
-;; 15. Cross-Platform Configuration
+;; 16. Cross-Platform Configuration
 ;; ============================================
 
 ;; macOS-specific configuration
@@ -494,11 +513,7 @@
   (use-package exec-path-from-shell
     :config
     (setq exec-path-from-shell-variables '("PATH" "MANPATH" "GOPATH"))
-    (exec-path-from-shell-initialize))
-
-  ;; Better scrolling on macOS
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
-        mouse-wheel-progressive-speed nil))
+    (exec-path-from-shell-initialize)))
 
 ;; Linux-specific configuration
 (when (eq system-type 'gnu/linux)
@@ -523,7 +538,7 @@
 ;;(add-hook 'after-init-hook #'my/setup-fonts)
 
 ;; ============================================
-;; 16. Security Settings
+;; 17. Security Settings
 ;; ============================================
 
 ;; Network security
@@ -536,7 +551,7 @@
       enable-local-eval nil)               ; Don't allow eval in file locals
 
 ;; ============================================
-;; 17. Performance Monitoring (Optional)
+;; 18. Performance Monitoring (Optional)
 ;; ============================================
 
 ;; Uncomment to benchmark startup time
@@ -545,7 +560,7 @@
 ;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; ============================================
-;; 18. Startup Optimization
+;; 19. Startup Optimization
 ;; ============================================
 
 ;; Display startup time
