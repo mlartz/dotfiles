@@ -665,11 +665,6 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # iTerm2 Configuration Best Practices
 # ====================================
 
-# Install Gruvbox Dark color scheme
-# Copy the color scheme file to iTerm2's colors directory
-mkdir -p "${HOME}/Library/Application Support/iTerm2/Colors"
-cp "${HOME}/.config/Gruvbox-Dark.itermcolors" "${HOME}/Library/Application Support/iTerm2/Colors/" 2>/dev/null || true
-
 # General iTerm2 Preferences
 # ---------------------------
 
@@ -723,8 +718,8 @@ defaults write com.googlecode.iterm2 OpenNoWindowsAtStartup -bool false
 
 # Option keys send Meta (essential for Emacs and some CLI tools)
 # 0 = Normal, 1 = Meta, 2 = +Esc
-defaults write com.googlecode.iterm2 "Option Key Sends" -int 0
-defaults write com.googlecode.iterm2 "Right Option Key Sends" -int 0
+defaults write com.googlecode.iterm2 "Option Key Sends" -int 1
+defaults write com.googlecode.iterm2 "Right Option Key Sends" -int 1
 
 # Application in terminal may access clipboard
 defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
